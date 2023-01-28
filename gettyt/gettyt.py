@@ -62,4 +62,4 @@ def main(args):
     if os.path.exists(target_filename):
         sys.stderr.write(f'{target_filename} already exists.\n')
         return -1
-    return getty_download(getty_id)
+    return getty_download(getty_id, target_filename)
