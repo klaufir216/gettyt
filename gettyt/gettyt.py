@@ -1,4 +1,5 @@
 import sys
+import os
 import argparse
 from urllib.parse import urlparse
 from io import BytesIO
@@ -32,7 +33,7 @@ def merge_images(img1, img2):
     return new_image
 
 
-def getty_download(getty_id):
+def getty_download(getty_id, target_filename):
     url1, url2 = get_urls(getty_id)
     response1 = get_image(url1)
     response2 = get_image(url2)
@@ -42,7 +43,7 @@ def getty_download(getty_id):
     new_image = merge_images(img1, img2)
     # getty saves jpeg with q=85
     # here q=86 is used to counteract reencode quality loss
-    new_image.save(f'{getty_id}.jpg', quality=86, exif=img1.info['exif'])
+    new_image.save(target_filename, quality=86, exif=img1.info['exif'])
 
 def get_id_from_url(url):
     return urlparse(url).path.split('/')[-1]
@@ -57,4 +58,8 @@ def main(args):
         getty_id = get_id_from_url(args.id_or_url)
     else:
         getty_id = args.id_or_url
+    target_filename = f'{getty_id}.jpg'
+    if os.path.exists(target_filename):
+        sys.stderr.write(f'{target_filename} already exists.\n')
+        return -1
     return getty_download(getty_id)
