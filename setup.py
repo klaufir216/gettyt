@@ -5,7 +5,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="gettyt",
-    version='0.1.0',
+    version='0.1.1',
     description="getty download tool",
     url="https://github.com/klaufir216/gettyt/",
     author="klaufir216",
