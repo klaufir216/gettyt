@@ -2,6 +2,13 @@
 
 `gettyt` is a downloader for getty images.
 
+## Features
+
+ - donloads 2048x2048 version
+ - removes watermark
+ - retains EXIF metadata
+ 
+
 # Build
 
 ```
